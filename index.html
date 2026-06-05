@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Fun Zone - Interactive Learning Space</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for playful icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fcf8ff;
+        }
+        .font-kids {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f0ff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dcd3ff;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a58eff;
+        }
+        /* Animation Effects */
+        .wave-hand {
+            animation: wave 2.5s infinite;
+            transform-origin: 70% 70%;
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate( 0.0deg) }
+            10% { transform: rotate(14.0deg) }
+            20% { transform: rotate(-8.0deg) }
+            30% { transform: rotate(14.0deg) }
+            40% { transform: rotate(-4.0deg) }
+            50% { transform: rotate(10.0deg) }
+        }
+        .float-bubble {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        .floating-star {
+            animation: pulseStar 2s infinite alternate;
+        }
+        @keyframes pulseStar {
+            0% { transform: scale(0.9) rotate(0deg); opacity: 0.8; }
+            100% { transform: scale(1.1) rotate(15deg); opacity: 1; }
+        }
+        .bounce-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-md border-b-4 border-purple-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 lg:py-0 lg:h-22 gap-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-pink-500 font-kids text-2xl tracking-wider flex items-center gap-2 cursor-pointer" onclick="switchSection('home')">
+                        <svg class="w-10 h-10 text-yellow-400 floating-star" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        ENG-FUN VII
+                    </span>
+                </div>
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <button onclick="switchSection('home')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-home">
+                        <i class="fa-solid fa-house mr-1"></i> Home
+                    </button>
+                    <button onclick="switchSection('materi')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-materi">
+                        <i class="fa-solid fa-book-open mr-1"></i> Topics
+                    </button>
+                    <button onclick="switchSection('listening')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-listening">
+                        <i class="fa-solid fa-headphones-simple mr-1"></i> Listening
+                    </button>
+                    <button onclick="switchSection('matching')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-matching">
+                        <i class="fa-solid fa-scale-balanced mr-1"></i> Politeness Sorter
+                    </button>
+                    <button onclick="switchSection('game')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-game">
+                        <i class="fa-solid fa-gamepad mr-1"></i> Guessing Game
+                    </button>
+                    <button onclick="switchSection('jumbled')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-jumbled">
+                        <i class="fa-solid fa-arrows-spin mr-1"></i> Dialogue Puzzle
+                    </button>
+                    <button onclick="switchSection('essay')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-essay">
+                        <i class="fa-solid fa-pen-to-square mr-1"></i> Dialogue Detective
+                    </button>
+                    <button onclick="switchSection('kuis')" class="nav-btn px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-purple-100 hover:text-purple-700 transition duration-200" id="nav-kuis">
+                        <i class="fa-solid fa-brain mr-1"></i> HOTS Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Custom Popup Notification -->
+        <div id="custom-alert" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl border-4 border-pink-400 transform scale-100 transition-all">
+                <div class="text-6xl mb-4" id="alert-icon">💡</div>
+                <h3 class="text-2xl font-kids text-slate-800" id="alert-title">Notification</h3>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed" id="alert-message">Custom message details.</p>
+                <button onclick="closeAlert()" class="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold px-8 py-3 rounded-full shadow-lg transition transform active:scale-95">OK</button>
+            </div>
+        </div>
+
+        <!-- ================= SECTION: HOME ================= -->
+        <section id="sec-home" class="space-y-8">
+            <!-- Playful and Cheerful Hero Section -->
+            <div class="bg-gradient-to-r from-purple-600 via-pink-500 to-amber-400 rounded-3xl p-6 md:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-15 transform translate-x-12 -translate-y-12 pointer-events-none">
+                    <!-- School items SVG -->
+                    <svg width="350" height="350" viewBox="0 0 100 100" fill="currentColor">
+                        <circle cx="50" cy="50" r="40"/>
+                    </svg>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="bg-white/20 text-xs sm:text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full text-white backdrop-blur-md inline-flex items-center gap-1.5 border border-white/20">
+                            <i class="fa-solid fa-rocket animate-bounce"></i> Interactive Learning Portal • Grade 7
+                        </span>
+                        <h1 class="text-4xl md:text-5.5xl font-kids leading-tight tracking-wide drop-shadow-md">
+                            🚀 Let's Speak Up:<br>English Fun Zone! <span class="wave-hand inline-block">👋</span>
+                        </h1>
+                        <p class="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed font-medium max-w-2xl">
+                            Unlock your English communication superpowers! Learn how to welcome people, say heartfelt thanks, say sweet goodbyes, and make sincere apologies like a pro. Perfect your pronunciation and level up your social skills!
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <button onclick="switchSection('materi')" class="bg-white text-purple-700 font-extrabold px-8 py-3.5 rounded-2xl hover:bg-purple-50 shadow-lg hover:scale-105 active:scale-95 transition duration-200 flex items-center gap-2">
+                                Start Adventure <i class="fa-solid fa-gamepad text-pink-500"></i>
+                            </button>
+                            <button onclick="switchSection('matching')" class="bg-purple-950/40 hover:bg-purple-950/60 text-white font-extrabold px-8 py-3.5 rounded-2xl shadow-lg border border-white/20 hover:scale-105 active:scale-95 transition duration-200 flex items-center gap-2">
+                                <i class="fa-solid fa-scale-balanced text-yellow-300"></i> Classify Expressions
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative bg-white/20 p-6 rounded-3xl backdrop-blur-md border border-white/35 shadow-2xl max-w-sm w-full text-center">
+                            <!-- Playful floating illustration -->
+                            <svg class="mx-auto w-40 h-40 float-bubble" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="100" cy="100" r="85" fill="#FFF3D6"/>
+                                <rect x="40" y="80" width="120" height="70" rx="20" fill="#FF84A1"/>
+                                <path d="M45 130 L100 170 L155 130 Z" fill="#FF84A1"/>
+                                <circle cx="70" cy="115" r="10" fill="#2D3436"/>
+                                <circle cx="130" cy="115" r="10" fill="#2D3436"/>
+                                <circle cx="66" cy="111" r="3" fill="white"/>
+                                <circle cx="126" cy="111" r="3" fill="white"/>
+                                <path d="M85 138 C92 144 108 144 115 138" stroke="#2D3436" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M40 50 C60 30 140 30 160 50" stroke="#7056FF" stroke-width="8" stroke-linecap="round"/>
+                                <path d="M100 20 L100 40" stroke="#FFD25A" stroke-width="6" stroke-linecap="round"/>
+                                <polygon points="100,10 110,25 90,25" fill="#FFD25A"/>
+                            </svg>
+                            <div class="mt-4 bg-white text-indigo-950 rounded-2xl p-4 font-bold text-xs sm:text-sm shadow-md border-b-4 border-indigo-200">
+                                <span class="text-rose-500 font-kids block text-sm mb-1">📢 Fun Feature Alert!</span>
+                                Play the Listening dialogs inside to hear realistic American pronunciation!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Learning Path Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Greetings -->
+                <div onclick="openMateri('greeting')" class="bg-white p-6 rounded-3xl border-t-8 border-emerald-400 border-b-4 border-slate-100 shadow-md bounce-card transition-all duration-300 cursor-pointer group">
+                    <div class="bg-emerald-100 w-16 h-16 rounded-2xl flex items-center justify-center text-emerald-600 font-kids text-3xl mb-4 group-hover:scale-110 transition-all">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="font-kids text-xl text-slate-800">1. Greetings</h3>
+                    <p class="text-sm text-slate-500 mt-2 leading-relaxed font-medium">Say hello, welcome other people, and open discussions in respectful formal or friendly styles.</p>
+                    <span class="text-emerald-500 text-xs font-bold block mt-4 group-hover:translate-x-2 transition-all">Go Study Topic ➜</span>
+                </div>
+                <!-- Card 2: Gratitude -->
+                <div onclick="openMateri('gratitude')" class="bg-white p-6 rounded-3xl border-t-8 border-amber-400 border-b-4 border-slate-100 shadow-md bounce-card transition-all duration-300 cursor-pointer group">
+                    <div class="bg-amber-100 w-16 h-16 rounded-2xl flex items-center justify-center text-amber-600 font-kids text-3xl mb-4 group-hover:scale-110 transition-all">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                    </div>
+                    <h3 class="font-kids text-xl text-slate-800">2. Gratitude</h3>
+                    <p class="text-sm text-slate-500 mt-2 leading-relaxed font-medium">Acknowledge support, express warm thankfulness, and reply kindly to helpers.</p>
+                    <span class="text-amber-500 text-xs font-bold block mt-4 group-hover:translate-x-2 transition-all">Go Study Topic ➜</span>
+                </div>
+                <!-- Card 3: Leave-taking -->
+                <div onclick="openMateri('leave')" class="bg-white p-6 rounded-3xl border-t-8 border-sky-400 border-b-4 border-slate-100 shadow-md bounce-card transition-all duration-300 cursor-pointer group">
+                    <div class="bg-sky-100 w-16 h-16 rounded-2xl flex items-center justify-center text-sky-600 font-kids text-3xl mb-4 group-hover:scale-110 transition-all">
+                        <i class="fa-solid fa-person-walking-arrow-right"></i>
+                    </div>
+                    <h3 class="font-kids text-xl text-slate-800">3. Leave-taking</h3>
+                    <p class="text-sm text-slate-500 mt-2 leading-relaxed font-medium">Conclude social dialogues cleanly, say goodbye, or prepare to exit interactions.</p>
+                    <span class="text-sky-500 text-xs font-bold block mt-4 group-hover:translate-x-2 transition-all">Go Study Topic ➜</span>
+                </div>
+                <!-- Card 4: Apology -->
+                <div onclick="openMateri('apology')" class="bg-white p-6 rounded-3xl border-t-8 border-rose-400 border-b-4 border-slate-100 shadow-md bounce-card transition-all duration-300 cursor-pointer group">
+                    <div class="bg-rose-100 w-16 h-16 rounded-2xl flex items-center justify-center text-rose-600 font-kids text-3xl mb-4 group-hover:scale-110 transition-all">
+                        <i class="fa-solid fa-face-sad-tear"></i>
+                    </div>
+                    <h3 class="font-kids text-xl text-slate-800">4. Apologies</h3>
+                    <p class="text-sm text-slate-500 mt-2 leading-relaxed font-medium">Acknowledge communication slipups, small accidents, and state sincere regrets.</p>
+                    <span class="text-rose-500 text-xs font-bold block mt-4 group-hover:translate-x-2 transition-all">Go Study Topic ➜</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: MATERI ================= -->
+        <section id="sec-materi" class="hidden space-y-6">
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
+                <button onclick="openMateri('greeting')" id="tab-greeting" class="materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200">👋 Greeting</button>
+                <button onclick="openMateri('gratitude')" id="tab-gratitude" class="materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200">💖 Gratitude</button>
+                <button onclick="openMateri('leave')" id="tab-leave" class="materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200">🏃 Leave-taking</button>
+                <button onclick="openMateri('apology')" id="tab-apology" class="materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200">🙏 Apology</button>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg border-2 border-purple-100 relative overflow-hidden">
+                <div id="materi-content">
+                    <!-- Dynamic material tabs injected via Javascript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: LISTENING ================= -->
+        <section id="sec-listening" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-4xl mx-auto border-2 border-purple-100">
+                <div class="text-center max-w-2xl mx-auto mb-8 space-y-2">
+                    <span class="bg-pink-100 text-pink-700 font-extrabold text-xs uppercase px-4 py-1.5 rounded-full inline-block">
+                        <i class="fa-solid fa-microphone-lines mr-1 animate-pulse"></i> Interactive Audio Practice
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800">Native American Listening Lab</h2>
+                    <p class="text-sm text-slate-500 font-medium">Listen carefully to conversational cues with a standard American accent. Play the audio as many times as you need, then pick the correct analysis!</p>
+                </div>
+
+                <!-- Listening Dashboard -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <!-- Left Control Deck -->
+                    <div class="md:col-span-5 bg-gradient-to-br from-purple-800 to-indigo-700 text-white rounded-3xl p-6 flex flex-col justify-between shadow-md relative overflow-hidden">
+                        <div class="space-y-4">
+                            <h3 class="font-kids text-xl text-yellow-300 flex items-center gap-2">
+                                <i class="fa-solid fa-volume-high animate-bounce"></i> Playback Deck
+                            </h3>
+                            <p class="text-xs text-purple-100 leading-relaxed font-medium">
+                                Adjust the speaking speed. We recommend slower speeds for closer studying.
+                            </p>
+                        </div>
+                        <div class="my-6 flex justify-center">
+                            <!-- Visual Vinyl Player Graphic Animation when Playing -->
+                            <div id="listening-visual-state" class="w-28 h-28 rounded-full bg-purple-950 border-4 border-pink-400 flex items-center justify-center shadow-inner relative transition duration-300">
+                                <i id="speaker-pulse-icon" class="fa-solid fa-circle-play text-4xl text-white transition hover:scale-110 cursor-pointer" onclick="playCurrentListeningDialog()"></i>
+                                <span class="absolute bottom-2 text-[10px] text-yellow-300 font-bold uppercase tracking-wider">Play Dialog</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3 bg-indigo-950/40 p-3 rounded-2xl border border-white/10">
+                            <label class="text-xs text-purple-200 block font-bold">Accent Speed Control:</label>
+                            <input type="range" min="0.6" max="1.1" step="0.1" value="0.8" id="tts-rate-control" class="w-full accent-pink-500 bg-purple-800 h-2 rounded-lg cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-purple-300 font-semibold">
+                                <span>Closer Study (0.6x)</span>
+                                <span>Native (1.1x)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Question Area -->
+                    <div class="md:col-span-7 space-y-6">
+                        <div class="flex justify-between items-center text-xs sm:text-sm font-semibold bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <span class="text-slate-600 font-bold">Audio Question: <span id="listen-curr-idx" class="text-purple-600 font-kids">1</span>/3</span>
+                            <span class="text-emerald-600 font-bold">Listening Score: <span id="listening-score" class="font-kids text-base">0</span></span>
+                        </div>
+
+                        <div class="bg-purple-50/50 border border-purple-100 p-5 rounded-2xl">
+                            <h4 class="text-purple-500 uppercase text-xs tracking-wider font-extrabold mb-1">Question Context:</h4>
+                            <p id="listen-question-text" class="text-slate-800 font-bold text-base md:text-lg"></p>
+                        </div>
+
+                        <!-- Listening Choices -->
+                        <div id="listening-choices" class="grid grid-cols-1 gap-3">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <!-- Dialogue script helper (Hidden until user checks answer) -->
+                        <div id="listening-script-box" class="hidden p-4 rounded-xl bg-amber-50 border border-amber-200 space-y-1 animate-fade-in">
+                            <span class="text-xs font-bold text-amber-800"><i class="fa-solid fa-scroll mr-1"></i> Audio Transcript / Dialog:</span>
+                            <p id="listening-script-text" class="text-sm italic text-slate-700 leading-relaxed"></p>
+                        </div>
+
+                        <!-- Bottom Controls -->
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="playCurrentListeningDialog()" class="bg-purple-100 hover:bg-purple-200 text-purple-700 font-extrabold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-volume-high"></i> Repeat Audio
+                            </button>
+                            <button id="btn-next-listening" onclick="nextListeningQuestion()" class="hidden bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-3 rounded-xl shadow transition text-sm">
+                                Next Audio Question <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listening Done State -->
+                <div id="listening-complete-screen" class="hidden text-center py-10 space-y-6">
+                    <div class="text-6xl">🎉</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Superb Listening Skills!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium">Your ears are getting tuned perfectly to natural American conversational styles!</p>
+                    <div class="bg-purple-50 inline-block p-4 rounded-2xl border border-purple-100">
+                        <span class="text-slate-400 text-xs block font-bold">Total Correct:</span>
+                        <span id="listening-final-score" class="text-4xl font-kids text-purple-600">0 / 3</span>
+                    </div>
+                    <div>
+                        <button onclick="restartListening()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Listen Again 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: MATCHING GAME ================= -->
+        <section id="sec-matching" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-3xl mx-auto border-2 border-purple-100">
+                <div class="text-center mb-6">
+                    <span class="bg-yellow-100 text-yellow-800 font-bold text-xs uppercase px-3 py-1 rounded-full inline-block">
+                        <i class="fa-solid fa-scale-balanced mr-1 animate-pulse"></i> Politeness Classifier
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800 mt-2">Politeness Sorting Game</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium">Is the expression formal & polite (excellent for teachers/elders) or casual & informal (best for friends)? Sort them correctly below!</p>
+                </div>
+
+                <!-- Game Deck -->
+                <div id="matching-game-deck" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <span>Score: <span id="matching-score" class="text-purple-600 font-kids text-base">0</span></span>
+                        <span>Item: <span id="matching-item-idx" class="text-indigo-600 font-kids text-base">1/8</span></span>
+                    </div>
+
+                    <!-- Current Card Screen -->
+                    <div class="bg-gradient-to-tr from-purple-50 to-pink-50 p-8 rounded-3xl border-2 border-purple-100 text-center space-y-4">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-pink-500 bg-pink-100 px-3 py-1 rounded-full">Expression to Classify</span>
+                        <h3 id="matching-card-text" class="text-2xl font-kids text-purple-900 drop-shadow-sm min-h-[60px] flex items-center justify-center px-4 leading-relaxed">
+                            "Good morning, Professor Higgins."
+                        </h3>
+                        <p class="text-xs text-slate-400 font-bold italic">Tap the speaker button to hear pronunciation</p>
+                        <button onclick="speakMatchingCard()" class="bg-white hover:bg-slate-100 text-purple-600 font-extrabold w-12 h-12 rounded-full shadow-md transition flex items-center justify-center mx-auto hover:scale-105 active:scale-95">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+
+                    <!-- Target Classification Buckets -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Formal / Polite Option Button -->
+                        <button onclick="submitMatch('formal')" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-200 text-center space-y-2 hover:-translate-y-1 transform active:scale-95">
+                            <div class="text-3xl"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h4 class="font-kids text-lg">Formal / Polite</h4>
+                            <p class="text-xs text-emerald-100 opacity-90 leading-relaxed font-medium">Use with teachers, parents, staff, elders, or people you do not know well.</p>
+                        </button>
+
+                        <!-- Casual / Informal Option Button -->
+                        <button onclick="submitMatch('casual')" class="bg-gradient-to-r from-pink-500 to-amber-500 hover:from-pink-600 hover:to-amber-600 text-white rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-200 text-center space-y-2 hover:-translate-y-1 transform active:scale-95">
+                            <div class="text-3xl"><i class="fa-solid fa-face-smile"></i></div>
+                            <h4 class="font-kids text-lg">Casual / Informal</h4>
+                            <p class="text-xs text-pink-100 opacity-90 leading-relaxed font-medium">Use strictly with close classmates, friends, teammates, or siblings.</p>
+                        </button>
+                    </div>
+
+                    <!-- Instant Explanation feedback block -->
+                    <div id="matching-explanation" class="hidden p-5 rounded-2xl text-center font-bold text-sm leading-relaxed transition-all duration-300"></div>
+                </div>
+
+                <!-- Complete Sorting screen -->
+                <div id="matching-complete" class="hidden text-center py-10 space-y-6">
+                    <div class="text-6xl animate-bounce">🏆</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Excellent Social Skills!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium">You easily differentiate between formal politeness and casual friendship tones!</p>
+                    <div class="bg-purple-50 inline-block p-4 rounded-2xl border border-purple-100">
+                        <span class="text-slate-400 text-xs block font-bold">Total Correct Score:</span>
+                        <span id="matching-final-score" class="text-4xl font-kids text-purple-600">0</span>
+                    </div>
+                    <div>
+                        <button onclick="restartMatching()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Play Again 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: GAME (TEBAK SITUASI) ================= -->
+        <section id="sec-game" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-3xl mx-auto border-2 border-purple-100">
+                <div class="text-center mb-6">
+                    <span class="bg-amber-100 text-amber-800 font-bold text-xs uppercase px-3 py-1 rounded-full inline-block">
+                        <i class="fa-solid fa-puzzle-piece mr-1"></i> Situational Training
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800 mt-2">Situational Guessing Game</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium">Analyze the social interaction. Check the avatar hint, and select the best, balanced interpersonal response.</p>
+                </div>
+
+                <!-- Game Container -->
+                <div id="game-container" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <span>Score: <span id="game-score" class="text-amber-600 font-kids text-base">0</span></span>
+                        <span>Level: <span id="game-level" class="text-indigo-600 font-kids text-base">1/6</span></span>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div class="bg-gradient-to-br from-indigo-50/50 to-purple-50/30 p-6 rounded-2xl border border-indigo-100 space-y-6">
+                        <div class="flex justify-center">
+                            <div id="game-avatar-box" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg text-6xl border-4 border-indigo-100">
+                                🏫
+                            </div>
+                        </div>
+                        <p id="game-situation" class="text-slate-800 font-semibold text-center text-base md:text-lg leading-relaxed bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                            <!-- Injected dynamically -->
+                        </p>
+                    </div>
+
+                    <!-- Options Grid (Balanced) -->
+                    <div id="game-options" class="grid grid-cols-1 gap-3">
+                        <!-- Injected dynamically -->
+                    </div>
+
+                    <!-- Feedback Area -->
+                    <div id="game-feedback" class="hidden p-4 rounded-2xl text-center font-bold text-sm transition-all duration-300">
+                        <!-- Correct/Incorrect feedback description -->
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="text-center">
+                        <button id="btn-next-game" onclick="nextGameLevel()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg transition duration-200">
+                            Next Challenge <i class="fa-solid fa-forward-fast ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Complete Screen -->
+                <div id="game-complete" class="hidden text-center py-12 space-y-6">
+                    <div class="text-6xl animate-bounce">🏆</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Sensational Performance!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium">You have successfully mastered the social nuances of interpersonal conversations!</p>
+                    <div class="bg-indigo-50 inline-block p-4 rounded-2xl border border-indigo-100">
+                        <span class="text-slate-400 text-xs block font-bold">Final Game Score:</span>
+                        <span id="game-final-score" class="text-4xl font-kids text-indigo-600">0</span>
+                    </div>
+                    <div>
+                        <button onclick="restartGame()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Play Again 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: DIALOGUE PUZZLE (JUMBLED SENTENCES) ================= -->
+        <section id="sec-jumbled" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-3xl mx-auto border-2 border-purple-100">
+                <div class="text-center mb-6">
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs uppercase px-3 py-1 rounded-full inline-block">
+                        <i class="fa-solid fa-arrows-spin mr-1"></i> Coherence Exercise
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800 mt-2">Interactive Dialogue Puzzle</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium">Tap the sentences in the scrambled pool to arrange them in the correct dialogue order. Make sure they form a logical conversation!</p>
+                </div>
+
+                <!-- Puzzle Area -->
+                <div id="jumbled-container" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <span>Level: <span id="jumbled-level" class="text-purple-600 font-kids text-base">1/2</span></span>
+                        <span>Score: <span id="jumbled-score" class="text-emerald-600 font-kids text-base">0</span></span>
+                    </div>
+
+                    <!-- Scenario Context -->
+                    <div class="bg-purple-50 p-5 rounded-2xl border border-purple-100">
+                        <h4 class="text-purple-900 uppercase text-xs font-extrabold tracking-wider mb-1">Scenario Task:</h4>
+                        <p id="jumbled-scenario" class="text-slate-700 text-sm md:text-base font-semibold leading-relaxed"></p>
+                    </div>
+
+                    <!-- User Selected Slots (Dialogue Arrangement Area) -->
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold uppercase text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-list-ol"></i> Your Organized Conversation (Tap to remove):
+                        </h4>
+                        <div id="jumbled-selection-slots" class="min-h-[120px] bg-slate-50 rounded-2xl p-4 border-2 border-dashed border-slate-200 flex flex-col gap-2">
+                            <!-- User ordered bubbles will land here -->
+                        </div>
+                    </div>
+
+                    <!-- Scrambled Sentences Pool -->
+                    <div class="space-y-2">
+                        <h4 class="text-xs font-bold uppercase text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-shuffle"></i> Scrambled Sentences Pool (Tap to place):
+                        </h4>
+                        <div id="jumbled-scrambled-pool" class="flex flex-col gap-2">
+                            <!-- Scrambled option buttons -->
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Feedback Alert -->
+                    <div id="jumbled-eval-feedback" class="hidden p-4 rounded-xl text-center font-bold text-sm">
+                        <!-- Correct/Incorrect details -->
+                    </div>
+
+                    <!-- Controller Action Buttons -->
+                    <div class="flex justify-between items-center pt-2">
+                        <button onclick="resetCurrentJumbledLevel()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm transition">
+                            Reset Arrangement 🔄
+                        </button>
+                        <button id="btn-check-jumbled" onclick="checkJumbledArrangement()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-3 rounded-xl shadow transition text-sm">
+                            Verify Order ✔️
+                        </button>
+                        <button id="btn-next-jumbled" onclick="nextJumbledLevel()" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-6 py-3 rounded-xl shadow transition text-sm">
+                            Next Level ➜
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Jumbled Complete Screen -->
+                <div id="jumbled-complete-screen" class="hidden text-center py-12 space-y-6">
+                    <div class="text-6xl animate-bounce">🏆</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Sensational Dialogue Organization!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium">You organized all mixed-up dialogues perfectly with high interpersonal logical flow!</p>
+                    <div class="bg-purple-50 inline-block p-4 rounded-2xl border border-purple-100">
+                        <span class="text-slate-400 text-xs block font-bold">Total Puzzle Score:</span>
+                        <span id="jumbled-final-score" class="text-4xl font-kids text-purple-600">0</span>
+                    </div>
+                    <div>
+                        <button onclick="restartJumbledGame()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Play Again 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- ================= SECTION: DIALOGUE DETECTIVE (SHORT ESSAY WRITING) ================= -->
+        <section id="sec-essay" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-3xl mx-auto border-2 border-purple-100">
+                <div class="text-center mb-6">
+                    <span class="bg-indigo-100 text-indigo-800 font-bold text-xs uppercase px-3 py-1 rounded-full inline-block">
+                        <i class="fa-solid fa-pen-to-square mr-1 animate-pulse"></i> Writing Quest
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800 mt-2">Dialogue Detective: Writing Challenge 🕵️‍♂️📝</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium">Read the social scenario carefully, then write your own English response in the text box. Be careful with who you are talking to!</p>
+                </div>
+
+                <!-- Essay Progress Bar -->
+                <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
+                    <div id="essay-progress-bar" class="bg-indigo-500 h-3 rounded-full transition-all duration-300" style="width: 10%;"></div>
+                </div>
+
+                <!-- Game Container -->
+                <div id="essay-container" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <span>Scenario: <span id="essay-current-num" class="text-indigo-600 font-kids text-base">1</span>/10</span>
+                        <span>Points: <span id="essay-score" class="text-emerald-600 font-kids text-base">0</span></span>
+                    </div>
+
+                    <!-- Speaker Character Bubble -->
+                    <div class="bg-gradient-to-br from-indigo-50/50 to-purple-50/30 p-6 rounded-2xl border border-indigo-100 flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-shrink-0 text-center">
+                            <div id="essay-avatar" class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md text-4xl border-2 border-indigo-100">
+                                👨‍🏫
+                            </div>
+                            <span id="essay-char-name" class="text-xs font-bold text-indigo-800 mt-2 block">Mr. Robert</span>
+                        </div>
+                        <div class="flex-grow space-y-2">
+                            <span class="text-[10px] uppercase font-extrabold tracking-widest text-indigo-500">The Situation:</span>
+                            <p id="essay-situation" class="text-slate-800 font-bold text-sm sm:text-base leading-relaxed">
+                                <!-- Loaded dynamically -->
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Student Writing Area -->
+                    <div class="space-y-2">
+                        <label for="essay-user-input" class="text-xs font-bold uppercase text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-keyboard"></i> Type Your Response Here (In English):
+                        </label>
+                        <textarea id="essay-user-input" rows="3" class="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 outline-none font-medium text-slate-700 text-sm placeholder-slate-400 shadow-sm transition" placeholder="Write your polite response here..."></textarea>
+                    </div>
+
+                    <!-- Evaluation Feedback Alert -->
+                    <div id="essay-feedback" class="hidden p-5 rounded-2xl border transition-all duration-300">
+                        <!-- Instantly calculated dynamic evaluation -->
+                    </div>
+
+                    <!-- Controller Action Buttons -->
+                    <div class="flex justify-between items-center pt-2">
+                        <button id="btn-submit-essay" onclick="submitEssayAnswer()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition text-sm flex items-center gap-2">
+                            Submit Response <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                        <button id="btn-next-essay" onclick="nextEssayQuestion()" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition text-sm flex items-center gap-2">
+                            Next Challenge <i class="fa-solid fa-circle-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Essay Complete Screen -->
+                <div id="essay-complete-screen" class="hidden text-center py-12 space-y-6">
+                    <div class="text-6xl animate-bounce">🕵️‍♂️🏆</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Master Detective Writer!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium">Excellent work! You analyzed all scenarios correctly and responded with wonderful social intelligence and polite grammar structures.</p>
+                    <div class="bg-indigo-50 inline-block p-4 rounded-2xl border border-indigo-100">
+                        <span class="text-slate-400 text-xs block font-bold">Total Writing Points:</span>
+                        <span id="essay-final-score" class="text-4xl font-kids text-indigo-600">0</span>
+                    </div>
+                    <div>
+                        <button onclick="restartEssay()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Play Again 🔄
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION: KUIS HOTS ================= -->
+        <section id="sec-kuis" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg max-w-3xl mx-auto border-2 border-purple-100">
+                <div class="text-center mb-6">
+                    <span class="bg-rose-100 text-rose-800 font-bold text-xs uppercase px-3 py-1 rounded-full inline-block">
+                        <i class="fa-solid fa-brain mr-1 animate-pulse"></i> Critical Assessment
+                    </span>
+                    <h2 class="text-3xl font-kids text-slate-800 mt-2">Kuis HOTS (Critical Thinking)</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium">Test your analytical social abilities with complex relationship questions. Pick correct answers, study detail hints!</p>
+                </div>
+
+                <!-- Quiz Progress -->
+                <div class="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
+                    <div id="quiz-progress-bar" class="bg-rose-500 h-3 rounded-full transition-all duration-300" style="width: 20%;"></div>
+                </div>
+
+                <!-- Quiz Main Area -->
+                <div id="quiz-area" class="space-y-6">
+                    <div class="flex justify-between text-xs text-slate-400 font-bold">
+                        <span>QUESTION <span id="quiz-current-num" class="text-rose-500 text-sm">1</span> OF 5</span>
+                        <span class="text-rose-600 uppercase tracking-widest"><i class="fa-solid fa-award"></i> HOTS LEVEL</span>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-3">
+                            <div id="quiz-scenario" class="text-sm text-slate-500 italic border-l-4 border-indigo-400 pl-3 leading-relaxed">
+                                <!-- Scenario details loaded inside script -->
+                            </div>
+                            <h3 id="quiz-question" class="text-slate-800 font-bold text-base md:text-lg leading-relaxed">
+                                <!-- Question text -->
+                            </h3>
+                        </div>
+
+                        <!-- Choices -->
+                        <div id="quiz-choices" class="grid grid-cols-1 gap-3">
+                            <!-- Dynamic choice loading -->
+                        </div>
+                    </div>
+
+                    <!-- Quiz Feedback (Explanation) -->
+                    <div id="quiz-explanation-box" class="hidden p-5 rounded-2xl border transition-all duration-300">
+                        <h4 id="quiz-feedback-title" class="font-bold text-base mb-1">Correct! 🎉</h4>
+                        <p id="quiz-explanation-text" class="text-sm leading-relaxed"></p>
+                    </div>
+
+                    <!-- Quiz Action Buttons -->
+                    <div class="flex justify-end">
+                        <button id="btn-next-quiz" onclick="nextQuizQuestion()" class="hidden bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Next Question <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results Area -->
+                <div id="quiz-results" class="hidden text-center py-12 space-y-6">
+                    <div class="text-6xl animate-bounce">🎯</div>
+                    <h3 class="text-2.5xl font-kids text-slate-800">Quiz Evaluation Complete!</h3>
+                    <p class="text-slate-500 max-w-md mx-auto font-medium" id="quiz-result-evaluation">Analyzing answers...</p>
+                    
+                    <div class="flex justify-center gap-6">
+                        <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100 w-32">
+                            <span class="text-slate-400 text-xs block font-bold">Your Score:</span>
+                            <span id="quiz-final-score" class="text-3xl font-kids text-rose-600">0</span>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 w-32">
+                            <span class="text-slate-400 text-xs block font-bold">Accuracy:</span>
+                            <span id="quiz-correct-count" class="text-3xl font-kids text-emerald-600">0/5</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button onclick="restartQuiz()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold px-8 py-3 rounded-full shadow-md transition transform active:scale-95">
+                            Retry Quiz 🔄
+                        </button>
+                        <button onclick="switchSection('materi')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-8 py-3 rounded-full shadow-sm transition">
+                            Review Topics 📚
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-purple-100 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs sm:text-sm space-y-1">
+            <p class="font-extrabold text-slate-700">&copy; 2026 English Fun Zone - Interactive Digital Companion</p>
+            <p class="text-slate-400 font-semibold">Designed for Middle School Junior English (Kurikulum Merdeka Class VII)</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic for App -->
+    <script>
+        // Data Materi Pembelajaran with detail-oriented explanations, interactive SVGs, and American voice settings
+        const materiData = {
+            greeting: {
+                title: "Greeting (Saying Hello)",
+                icon: `<svg class="w-24 h-24 text-emerald-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" fill="#E6F4EA"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01"/>
+                       </svg>`,
+                color: "emerald",
+                intro: "Greetings are powerful tools of social politeness. We use them to initiate conversation warmly, establish respectful connection, and say hello. In English-speaking cultures, greetings are strongly categorized into <strong>Formal Greetings</strong> (for figures of authority like teachers, parents, older people, or complete strangers) and <strong>Informal Greetings</strong> (for classmates, siblings, or close teammates). Selecting the right expression matches the atmosphere and social expectations.",
+                keyRules: [
+                    "Always monitor the actual hour of the day: <strong>Good morning</strong> is appropriate from sunrise until 12:00 PM; <strong>Good afternoon</strong> is from 12:00 PM until around 6:00 PM; and <strong>Good evening</strong> covers 6:00 PM up until bedtime.",
+                    "<em>'How do you do?'</em> is exclusive! You must only speak it during the absolute initial introduction meeting with a stranger. It is not an ongoing question of health.",
+                    "Combine greetings with a gentle wave or a confident smile to look approachable and confident."
+                ],
+                expressions: [
+                    { expression: "Good morning", response: "Good morning", type: "Formal", meaning: "Spoken from early morning until noon" },
+                    { expression: "Good afternoon", response: "Good afternoon", type: "Formal", meaning: "Spoken from noon (12 PM) until evening (6 PM)" },
+                    { expression: "Good evening", response: "Good evening", type: "Formal", meaning: "Spoken from 6 PM onwards as a greeting" },
+                    { expression: "How do you do?", response: "How do you do?", type: "Formal (First Meeting)", meaning: "A traditional introductory phrase, not asking about health" },
+                    { expression: "How are you doing?", response: "I'm doing great, thank you / Wonderful!", type: "Formal/Informal", meaning: "Asking how things are transitioning" },
+                    { expression: "Hello! / Hi!", response: "Hi! / Hello!", type: "Informal", meaning: "Most standard and friendly casual opener" },
+                    { expression: "What's up? / How's it going?", response: "Not much, you? / Pretty good!", type: "Informal", meaning: "Relaxed slang only for peers and close friends" }
+                ],
+                dialogue: {
+                    situation: "Beni meets his English advisor, Mrs. Linda, in the school lobby at exactly 7:15 AM.",
+                    cast: ["Beni", "Mrs. Linda"],
+                    lines: [
+                        { speaker: "Beni", text: "Good morning, Mrs. Linda. How are you today, ma'am?", highlight: true },
+                        { speaker: "Mrs. Linda", text: "Good morning, Beni. I am very well, thank you. How are your preparations for the class project?", highlight: false },
+                        { speaker: "Beni", text: "They are moving on nicely, ma'am. Thank you for asking!", highlight: false }
+                    ]
+                }
+            },
+            gratitude: {
+                title: "Gratitude (Showing Thanks)",
+                icon: `<svg class="w-24 h-24 text-amber-500 mx-auto animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                       </svg>`,
+                color: "amber",
+                intro: "Gratitude is the positive practice of acknowledging and expressing thankfulness. We say 'Thank you' to show gratitude when we receive friendly assistance, cute gifts, heartwarming compliments, or practical services. Developing different variations of gratitude makes conversations sound colorful and pleasant, transforming classmates into strong allies.",
+                keyRules: [
+                    "Don't limit your speech to just 'You're welcome'. Switch your answers to sound more natural, such as <strong>'My pleasure'</strong> or <strong>'Anytime'</strong>.",
+                    "Match your voice to sound warm and appreciative. Eye contact makes a simple thank you twice as sincere."
+                ],
+                expressions: [
+                    { expression: "Thank you very much / Thank you", response: "You are most welcome", type: "Formal", meaning: "Polite and respectful way to show appreciation" },
+                    { expression: "I really appreciate your timely help", response: "It was my absolute pleasure", type: "Formal", meaning: "A deeper, more dedicated thank you" },
+                    { expression: "Thanks a lot! / Thank you so much!", response: "No worries! / Anytime!", type: "Informal", meaning: "Casual thanks for minor favors" },
+                    { expression: "Thanks for the lovely present", response: "Don't mention it / I'm glad you like it", type: "Informal/Formal", meaning: "Thanking for an physical item" }
+                ],
+                dialogue: {
+                    situation: "Siti is struggling to carry massive textbook piles. Doni steps up to help her out.",
+                    cast: ["Siti", "Doni"],
+                    lines: [
+                        { speaker: "Siti", text: "Doni, thank you so much for helping me carry these books. They are extremely heavy!", highlight: true },
+                        { speaker: "Doni", text: "You are most welcome, Siti. Don't mention it! I am always ready to help.", highlight: false }
+                    ]
+                }
+            },
+            leave: {
+                title: "Leave-taking (Saying Goodbye)",
+                icon: `<svg class="w-24 h-24 text-sky-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" fill="#E0F2FE"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                       </svg>`,
+                color: "sky",
+                intro: "Leave-taking is the collection of social phrases used when you exit an interaction or separate paths. Breaking a conversation suddenly or slipping away in silence can look incredibly dismissive. Polite departure patterns signal respect and set up your next comfortable meetup.",
+                keyRules: [
+                    "<strong>'Good night'</strong> is exclusively a leave-taking expression. You must only say it when saying goodbye late at night, or when going straight to bed. It is never a greeting when you arrive at a party!",
+                    "Provide a sweet, brief context to explain your departure nicely (e.g. 'I must be off now, my bus is coming')."
+                ],
+                expressions: [
+                    { expression: "Goodbye", response: "Goodbye / Bye", type: "Formal", meaning: "Polite standard way to leave a situation" },
+                    { expression: "Good night", response: "Good night / Sweet dreams", type: "Formal (Late evening)", meaning: "Used strictly when heading to sleep or parting late" },
+                    { expression: "It was wonderful meeting you", response: "The pleasure was mine", type: "Formal", meaning: "Said to a newly met stranger" },
+                    { expression: "See you later / See you tomorrow", response: "See you / Take care!", type: "Informal", meaning: "Friendly standard departure with friends" },
+                    { expression: "I must be going now / I'd better get going", response: "Sure, drive safely! / Catch you later!", type: "Informal", meaning: "A gentle way of preparing to leave" }
+                ],
+                dialogue: {
+                    situation: "Roni is talking with Edo in the school yard, but he spots his school bus honking.",
+                    cast: ["Roni", "Edo"],
+                    lines: [
+                        { speaker: "Roni", text: "Edo, I would love to chat more, but my school bus is already honking. I have to run!", highlight: true },
+                        { speaker: "Edo", text: "No worries, buddy! Go catch your bus safely.", highlight: false },
+                        { speaker: "Roni", text: "Thanks! See you tomorrow at school!", highlight: true },
+                        { speaker: "Edo", text: "See you, Roni! Take care!", highlight: false }
+                    ]
+                }
+            },
+            apology: {
+                title: "Apology (Saying Sorry)",
+                icon: `<svg class="w-24 h-24 text-rose-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" fill="#FFE4E6"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                       </svg>`,
+                color: "rose",
+                intro: "Apology expressions are the social tools for repairing connection, admitting a personal blunder, or gently handling uncomfortable situations. Apologizing properly validates the feelings of others, proves that you prioritize your friendships over stubborn pride, and keeps interactions peace-centered.",
+                keyRules: [
+                    "A great apology includes a <strong>constructive resolution</strong> (e.g. 'Let me fetch a rag and dry this spill' or 'I will replace the pencil right away').",
+                    "Do not use casual slang like 'My bad!' for severe errors, or when speaking with adults like teachers, as it sounds careless."
+                ],
+                expressions: [
+                    { expression: "Please accept my apologies / I apologize for my mistake", response: "Please don't worry about it / That's quite alright", type: "Formal", meaning: "Polite ways to state deep regrets" },
+                    { expression: "I am extremely sorry for keeping you waiting", response: "Never mind, it is fine", type: "Formal/Informal", meaning: "A sincere apology for a mistake" },
+                    { expression: "Sorry / I'm so sorry", response: "It's okay / No worries", type: "Informal", meaning: "Standard casual apologies for minor accidents" },
+                    { expression: "Oops, my bad!", response: "That's fine, don't worry", type: "Slang (Very Informal)", meaning: "Only for tiny harmless blunders with close friends" }
+                ],
+                dialogue: {
+                    situation: "Lina accidentally knocks over Kevin's desk organizer, scattering pencils all over.",
+                    cast: ["Lina", "Kevin"],
+                    lines: [
+                        { speaker: "Lina", text: "Oh my goodness! Kevin, I am so sorry! I accidentally hit your organizer while turning around.", highlight: true },
+                        { speaker: "Kevin", text: "It's okay, Lina. No permanent damage done. Let's pick them up.", highlight: false },
+                        { speaker: "Lina", text: "Thank you for understanding, Kevin. Let me arrange them back nicely for you.", highlight: true }
+                    ]
+                }
+            }
+        };
+
+        // Data Game Tebak Situasi (Options Balanced to 14-18 Words for strict test design integrity)
+        const gameData = [
+            {
+                level: 1,
+                visual: "🏫",
+                situation: "You walk past the school gate at exactly 6:45 AM. Your School Principal is standing there greeting students. What is the most polite action-phrase to speak?",
+                options: [
+                    { text: "What's up, Principal? This is an absolutely beautiful and sunny morning to learn!", isCorrect: false, feedback: "Informal slang ('What's up') is inappropriate for talking to authority figures like your principal." },
+                    { text: "Good morning, Sir. How are you doing on this wonderful and pleasant morning?", isCorrect: true, feedback: "Splendid! This is highly respectful, combining a formal morning greeting and polite inquiry." },
+                    { text: "Goodbye Sir, I hope you have an amazing and relaxing afternoon at school!", isCorrect: false, feedback: "Incorrect. You just arrived at school; speaking a leave-taking phrase makes no sense here." }
+                ]
+            },
+            {
+                level: 2,
+                visual: "🍰",
+                situation: "Your seatmate brings delicious traditional cupcakes. Knowing you helped her with hard math homework yesterday, she hands you two big pieces. What is the best way to respond?",
+                options: [
+                    { text: "Thank you so much, friend! This is incredibly kind of you to share with me.", isCorrect: true, feedback: "Awesome! This shows high appreciation in an appropriate, warm, and friendly level of peer register." },
+                    { text: "I apologize sincerely, friend! I cannot eat these sweet cakes because I am full.", isCorrect: false, feedback: "Incorrect. She is handing you a nice reward, there is no need to deliver apologies." },
+                    { text: "Please don't worry, friend! You should put those sweet cakes back in your bag.", isCorrect: false, feedback: "A bit dismissive. Rejecting a kind gesture without thankfulness comes off as cold." }
+                ]
+            },
+            {
+                level: 3,
+                visual: "🎨",
+                situation: "During an art class, you bump into your classmate's desk. His watercolor cup tips over, completely ruining his landscape drawing that took hours. What should you say?",
+                options: [
+                    { text: "Oh, my bad! But look at the bright side, you can easily paint a brand new landscape.", isCorrect: false, feedback: "Using 'my bad' is far too casual for a major accident and undermines their hard work." },
+                    { text: "I'm extremely sorry, but you shouldn't have put your watercolor cup so close to my workspace.", isCorrect: false, feedback: "Shifting the blame to the victim ruins an apology, making it sound very defensive." },
+                    { text: "I am terribly sorry for ruining your painting. Please let me buy you a new canvas today.", isCorrect: true, feedback: "Perfect! Sincere regret combined with an immediate, constructive solution to make amends." }
+                ]
+            },
+            {
+                level: 4,
+                visual: "💼",
+                situation: "Your teacher spent 30 minutes writing a gorgeous recommendation letter so you could join the English Debate Club. How should you show proper respect?",
+                options: [
+                    { text: "Never mind, Miss. I will tell you immediately if I win the debate championship trophy.", isCorrect: false, feedback: "A bit self-centered. You must prioritize showing deep gratitude to the teacher first." },
+                    { text: "Thank you very much, Miss. I truly appreciate your kindness and time in helping me.", isCorrect: true, feedback: "Excellent! This is highly respectful, formal, and perfectly suited for expressing thanks to a teacher." },
+                    { text: "Thanks a lot! You are definitely the most awesome and helpful teacher in this school.", isCorrect: false, feedback: "Slightly too informal. While positive, highly casual registers do not match professional academic support." }
+                ]
+            },
+            {
+                level: 5,
+                visual: "💻",
+                situation: "You log in 15 minutes late to an online English Zoom Class because your home router disconnected. How do you address the teacher politely as you enter?",
+                options: [
+                    { text: "Please excuse my tardiness, Mr. Alan. My home internet crashed, and I am very sorry for the interruption.", isCorrect: true, feedback: "Perfect. Polite formal apology explaining the connection failure with high respect." },
+                    { text: "Hello, sorry I'm late! Turn on the screen recording for me, please, so I can catch up.", isCorrect: false, feedback: "A bit demanding. You shouldn't order the teacher around when arriving late." },
+                    { text: "Hey, sorry! My router died suddenly. What did I miss in the lesson during the last fifteen minutes?", isCorrect: false, feedback: "Too casual. This register is suitable for peers, not for an academic Zoom class with your instructor." }
+                ]
+            },
+            {
+                level: 6,
+                visual: "🚍",
+                situation: "You are hanging out at the bus stop chatting with classmates. Suddenly your bus arrives, and the driver honks. You must leave immediately. What do you say?",
+                options: [
+                    { text: "I have to run now! My bus is here. See you guys tomorrow, take care!", isCorrect: true, feedback: "Superb! Brief explanation, warm friendly departure, and matching leave-taking phrase." },
+                    { text: "Good night everyone! Sleep well! I hope you all have wonderful and sweet dreams tonight!", isCorrect: false, feedback: "Incorrect. You are catching an afternoon bus, not going to sleep. 'Good night' is for bedtime." },
+                    { text: "I am extremely sorry for this horrible meeting. I hope you can forgive my departure.", isCorrect: false, feedback: "Too melodramatic. Leaving the bus stop to ride home does not require deep, sorrowful remorse." }
+                ]
+            }
+        ];
+
+        // Data Listening Lab with standard American accent
+        const listeningData = [
+            {
+                dialogText: "Good morning, Clara. Did you sleep well last night? - Good morning, Dad. Yes, I slept like a baby. Thank you!",
+                question: "Listen to the dialogue. What is the social relationship between the two speakers?",
+                choices: [
+                    { text: "A teacher and a junior student", isCorrect: false },
+                    { text: "A caring father and his daughter", isCorrect: true },
+                    { text: "Two classmates meeting in a bus station", isCorrect: false },
+                    { text: "A clinic doctor and a patient", isCorrect: false }
+                ],
+                explanation: "The male speaker greets 'Clara' warmly, and she responds with 'Dad', indicating a direct parent-child relationship."
+            },
+            {
+                dialogText: "Hey Jack, thank you so much for lending me your bicycle yesterday! - Anytime, Liam! Don't mention it.",
+                question: "What is the phrase Jack uses to respond to Liam's friendly gratitude?",
+                choices: [
+                    { text: "\"Anytime\"", isCorrect: true },
+                    { text: "\"Thank you so much\"", isCorrect: false },
+                    { text: "\"Don't worry\"", isCorrect: false },
+                    { text: "\"I am sorry\"", isCorrect: false }
+                ],
+                explanation: "Jack says 'Anytime, Liam!', which is a highly friendly, native-like casual expression for 'You are welcome'."
+            },
+            {
+                dialogText: "I am extremely sorry, Mrs. Davis. I accidentally left my homework journal at home. - It is quite alright, Tom. But please bring it to my office tomorrow morning.",
+                question: "Why did Tom apologize to Mrs. Davis?",
+                choices: [
+                    { text: "He broke her office coffee mug", isCorrect: false },
+                    { text: "He came late to the school assembly", isCorrect: false },
+                    { text: "He left his homework journal at home", isCorrect: true },
+                    { text: "He forgot Mrs. Davis's name", isCorrect: false }
+                ],
+                explanation: "Tom says 'I accidentally left my homework journal at home,' which represents a standard academic issue needing a polite apology."
+            }
+        ];
+
+        // Jumbled Dialogue Puzzle Data
+        const jumbledData = [
+            {
+                scenario: "Arrange this classroom conversation between Mrs. Evelyn and Dani, who arrives slightly late.",
+                correctOrder: [
+                    "Good morning, Mrs. Evelyn. I am sorry for being a few minutes late.",
+                    "Good morning, Dani. Why did you arrive late today?",
+                    "I had a flat tire on my bicycle while riding to school.",
+                    "I see. Please take your seat now and open page twelve.",
+                    "Thank you very much, ma'am. I appreciate your understanding."
+                ]
+            },
+            {
+                scenario: "Arrange this dialogue between Maya and Ryan after completing their English homework project.",
+                correctOrder: [
+                    "We finally finished typing our presentation slides, Maya!",
+                    "Yes! Thank you so much for helping me research the vocabulary.",
+                    "Don't mention it. Working together made it much faster.",
+                    "My mother is waiting outside now, so I must go.",
+                    "Alright. Have a safe trip home, and see you tomorrow!",
+                    "Thanks! See you tomorrow, Ryan. Take care!"
+                ]
+            }
+        ];
+
+        // HOTS Quiz Data
+        const quizQuestions = [
+            {
+                scenario: "Rania is a transfer student from Jakarta. On her first day at a public high school in California, she meets a teacher in the afternoon hallway. She smiles, looks him in the eye, and says, 'How do you do, Sir?' The teacher smiles back and replies, 'How do you do, Rania?'",
+                question: "Analyze Rania's communicative choice. Why is 'How do you do?' appropriate here instead of 'What's up?' or 'How are you?'",
+                choices: [
+                    { text: "Because Rania is already close friends with the teacher.", isCorrect: false },
+                    { text: "Because 'How do you do?' is a highly formal, respectful greeting reserved specifically for the first time we meet someone.", isCorrect: true },
+                    { text: "Because she wanted to check if the teacher was feeling healthy.", isCorrect: false },
+                    { text: "Because teachers in California do not like simple 'Hello'.", isCorrect: false }
+                ],
+                explanation: "'How do you do?' is a highly traditional, polite formal phrase reserved for absolute first-time encounters. It functions as a respectful 'Nice to meet you'."
+            },
+            {
+                scenario: "At 9:45 PM, Adam finishes a heavy English project at Sarah's house. Before stepping out into his driveway, he waves and shouts, 'Good night, Sarah! See you tomorrow!' Sarah waves back happily and replies, 'Good night, Adam!'",
+                question: "Why does Adam use 'Good night' in this situation instead of saying 'Good evening'?",
+                choices: [
+                    { text: "Because 'Good night' is a standard formal greeting when arriving at houses at night.", isCorrect: false },
+                    { text: "Because 'Good night' is a leave-taking phrase used strictly during late departures or bedtime, whereas 'Good evening' is a greeting.", isCorrect: true },
+                    { text: "Because Adam is extremely tired and wants to hint that Sarah should sleep.", isCorrect: false },
+                    { text: "Because it was already past midnight in that timezone.", isCorrect: false }
+                ],
+                explanation: "'Good evening' is spoken to welcome someone when you meet at night. 'Good night' is a departure phrase used to say goodbye at night or heading to bed."
+            },
+            {
+                scenario: "Fadel borrowed John's laptop to type an essay. While focusing, Fadel accidentally knocked over his juice glass, damaging the laptop trackpad. Fadel wants to apologize sincerely and rebuild trust.",
+                question: "Which of the following represents the most constructive and polite approach for Fadel?",
+                choices: [
+                    { text: "\"Oops, my bad! Laptop trackpads are quite cheap to replace anyway, right?\"", isCorrect: false },
+                    { text: "\"I am sorry, John. But you really shouldn't have set your workspace so close to my juice cup.\"", isCorrect: false },
+                    { text: "\"I am terribly sorry for spilling juice on your trackpad. Please allow me to take it to the repair shop today and pay for all the damages.\"", isCorrect: true },
+                    { text: "\"It was an unavoidable accident, please don't hold a grudge. See you tomorrow!\"", isCorrect: false }
+                ],
+                explanation: "Sincere apologies must validate the damage, take complete personal accountability, and offer a constructive, real-world solution."
+            },
+            {
+                scenario: "Tasia spent her entire weekend helping her junior schoolmate, Leo, prepare his slides for the English Speech Competition. Leo won the championship trophy and texts her: 'I couldn't have won this without your guidance, Sis! I really appreciate your support!'",
+                question: "What is the best encouraging response for Tasia to validate Leo's achievement?",
+                choices: [
+                    { text: "\"Of course you did. I am basically the smartest tutor in the entire district.\"", isCorrect: false },
+                    { text: "\"It was my absolute pleasure, Leo! You put in immense effort, and you deserved every bit of this victory. Well done!\"", isCorrect: true },
+                    { text: "\"No problem. Just don't forget to pay me back for my time next week.\"", isCorrect: false },
+                    { text: "\"I apologize if my coaching was stressful for you.\"", isCorrect: false }
+                ],
+                explanation: "Replying to sincere gratitude with validation, warmth, and joint celebration boosts the confidence of learners and builds solid community relationships."
+            },
+            {
+                scenario: "During a hybrid classroom session, Mr. Bryan's presentation audio suddenly freezes, and the students cannot hear his explanation. Clarissa needs to politely interrupt the lecture to alert him.",
+                question: "Analyze the social context and choose the most polished greeting and apology combination for Clarissa.",
+                choices: [
+                    { text: "\"Hey Bryan, stop presenting! Your microphone is completely dead!\"", isCorrect: false },
+                    { text: "\"Excuse me, Mr. Bryan. I am very sorry for interrupting your explanation, but your microphone signal seems to be lagging, and we cannot hear you clearly.\"", isCorrect: true },
+                    { text: "\"Good night, Mr. Bryan. We apologize because we are logging off this room now.\"", isCorrect: false },
+                    { text: "\"Sir, thank you for speaking, but please restart the whole lesson because we weren't listening anyway.\"", isCorrect: false }
+                ],
+                explanation: "A polished interruption must start with an attention-getter ('Excuse me'), offer a small formal apology for breaking flow ('I am sorry for interrupting'), and state the technological issue with high respect."
+            }
+        ];
+
+        // Data for Matching Game (Word / Sentence classification)
+        const matchingData = [
+            {
+                expression: "How do you do, Mrs. Henderson?",
+                category: "formal",
+                explanation: "Correct! This is highly formal and polite. It is exclusively used when introducing yourself to a respected elder or adult for the first time."
+            },
+            {
+                expression: "What's up, mate? Good to see ya!",
+                category: "casual",
+                explanation: "Spot on! This is a relaxed, friendly, and informal greeting. Perfect for close school friends, but should be avoided with teachers."
+            },
+            {
+                expression: "Please accept my sincerest apologies for this error.",
+                category: "formal",
+                explanation: "Awesome! This is a formal apology. It uses polite grammar appropriate for emails, teachers, or professional communications."
+            },
+            {
+                expression: "Oops! My bad, buddy!",
+                category: "casual",
+                explanation: "Excellent! 'My bad' is highly casual slang. Use it only with friends for small mistakes, never with authority figures."
+            },
+            {
+                expression: "I would like to express my deepest gratitude for your support.",
+                category: "formal",
+                explanation: "Splendid! This is a formal way to say thank you, showing extreme respect and appropriate for formal letters or teachers."
+            },
+            {
+                expression: "Thanks a bunch, you're a lifesaver!",
+                category: "casual",
+                explanation: "Perfect! 'Thanks a bunch' is casual. It is a lovely way to thank a classmate, but too informal for a strict classroom paper."
+            },
+            {
+                expression: "Goodbye and have a wonderful afternoon, sir.",
+                category: "formal",
+                explanation: "Exactly! Saying goodbye with 'sir' or 'ma'am' is respectful and formal leave-taking suitable for school environments."
+            },
+            {
+                expression: "Gotta run, catch ya later!",
+                category: "casual",
+                explanation: "Indeed! 'Gotta run' and 'catch ya later' are friendly slang expressions used when parting with friends."
+            }
+        ];
+
+        // App state variables
+        let activeSection = 'home';
+        let activeMateri = 'greeting';
+        
+        let gameScore = 0;
+        let gameLevel = 1;
+
+        let quizCurrentIndex = 0;
+        let quizScore = 0;
+
+        let listenCurrentIndex = 0;
+        let listeningScoreValue = 0;
+
+        let jumbledLevel = 1;
+        let jumbledScore = 0;
+        let jumbledPool = [];
+        let jumbledUserArrangement = [];
+
+        // Dialogue Detective Short Essay Data
+        let essayCurrentIndex = 0;
+        let essayScore = 0;
+        const essayData = [
+            {
+                avatar: "👨‍🏫",
+                character: "Mr. Robert (Your Teacher)",
+                situation: "You meet your school teacher, Mr. Robert, at a supermarket in the evening at 7:30 PM. How do you greet him politely?",
+                placeholder: "e.g., Good evening, Mr. Robert. How are you today?",
+                keywords: ["good evening"],
+                idealAnswer: "Good evening, Mr. Robert. How are you tonight?",
+                tip: "Since it is 7:30 PM, use 'Good evening'. Avoid using 'Good night' as a greeting because it is only used when leaving or going to sleep."
+            },
+            {
+                avatar: "👩",
+                character: "Jessica (Your Best Friend)",
+                situation: "Your classmate and close friend, Jessica, just arrived at your house to work on a school project. Write a friendly, casual greeting to welcome her.",
+                placeholder: "e.g., Hi Jessica! What's up?",
+                keywords: ["hi", "hello", "what's up", "how's it going", "hey", "welcome"],
+                idealAnswer: "Hey Jessica! What's up? Come in, let's get started!",
+                tip: "For close friends, use casual greetings like 'Hey', 'What's up?', or 'Hi'. Avoid being overly formal."
+            },
+            {
+                avatar: "👦",
+                character: "Budi (Your Classmate)",
+                situation: "Your classmate, Budi, lent you his umbrella during a heavy rainstorm yesterday so you wouldn't get wet. Write a warm thank you response to him.",
+                placeholder: "e.g., Thanks a lot for the umbrella, Budi!",
+                keywords: ["thank", "thanks", "grateful", "appreciate"],
+                idealAnswer: "Thanks a lot for lending me your umbrella yesterday, Budi! You really saved me.",
+                tip: "A sincere thank you should mention the helpful item or action specifically. You can use friendly expressions like 'Thanks a lot' or 'I really appreciate it'."
+            },
+            {
+                avatar: "👩‍🏫",
+                character: "Mrs. Linda (Your English Teacher)",
+                situation: "Mrs. Linda gives you an amazing compliment on your excellent performance during the class presentation. Write a highly polite and formal response to show appreciation.",
+                placeholder: "e.g., Thank you very much, ma'am.",
+                keywords: ["thank", "appreciate", "kind"],
+                idealAnswer: "Thank you very much, Mrs. Linda. I really appreciate your encouraging feedback!",
+                tip: "When talking to teachers, show high respect. Phrases like 'Thank you very much, ma'am/sir' or 'I really appreciate your kind words' work beautifully."
+            },
+            {
+                avatar: "🧓",
+                character: "Your Father",
+                situation: "It is 10:15 PM and you are heading upstairs to sleep. What should you say to your father before going to bed?",
+                placeholder: "e.g., Good night, Dad. See you tomorrow.",
+                keywords: ["good night"],
+                idealAnswer: "Good night, Dad. Have a restful sleep! See you tomorrow.",
+                tip: "Use 'Good night' when saying goodbye late in the evening or right before going to bed."
+            },
+            {
+                avatar: "🧑",
+                character: "Farel (Your Friend)",
+                situation: "You are hanging up with Farel, but your mother just texted you that your dinner is ready. How do you say goodbye casually?",
+                placeholder: "e.g., I have to go, Farel. See you later!",
+                keywords: ["bye", "goodbye", "see you", "later", "go", "run"],
+                idealAnswer: "I must run now, Farel! My mom is waiting. See you tomorrow, take care!",
+                tip: "With friends, use casual leave-taking expressions like 'Gotta go!', 'See you later!', or 'Bye!'."
+            },
+            {
+                avatar: "👱‍♀️",
+                character: "Lina (Your Seatmate)",
+                situation: "During science class, you accidentally stepped on your seatmate Lina's clean shoes while walking back to your desk. Write a sincere apology.",
+                placeholder: "e.g., I am so sorry, Lina! I didn't mean to.",
+                keywords: ["sorry", "apologize", "pardon"],
+                idealAnswer: "Oh, I am so sorry for stepping on your shoes, Lina! Let me wipe off that dust.",
+                tip: "A great apology is prompt, sincere, and mentions the action. You can say 'I'm so sorry!' and offer a small constructive action."
+            },
+            {
+                avatar: "👵",
+                character: "Mrs. Clara (School Librarian)",
+                situation: "You forgot to return a library book yesterday. Now you are returning it late. Write a formal apology to the school librarian, Mrs. Clara.",
+                placeholder: "e.g., I apologize for returning this book late, Mrs. Clara.",
+                keywords: ["sorry", "apologize", "forgive", "excuse"],
+                idealAnswer: "Please accept my apologies, Mrs. Clara. I am extremely sorry for returning the book late.",
+                tip: "Use formal apology frames like 'Please accept my apologies' or 'I apologize for...' when addressing adults or figures of authority."
+            },
+            {
+                avatar: "👩‍🦰",
+                character: "Risa (Your Friend)",
+                situation: "Risa happily says to you: 'Thank you for sharing your lunch with me, it was so delicious!' Write a warm, friendly response to accept her gratitude.",
+                placeholder: "e.g., You are welcome, Risa! Anytime.",
+                keywords: ["welcome", "pleasure", "anytime", "mention", "happy", "problem"],
+                idealAnswer: "Anytime, Risa! I'm really glad you liked the food. We can share again tomorrow!",
+                tip: "Besides 'You are welcome', you can use pleasant casual alternatives like 'Anytime!', 'My pleasure!', or 'Don't mention it!' to sound natural."
+            },
+            {
+                avatar: "👨‍🏫",
+                character: "Mr. Alan (Your Teacher)",
+                situation: "Your homeroom teacher says: 'Can you please help me carry these books to the staffroom?' Write a polite and helpful response showing you are happy to do it.",
+                placeholder: "e.g., Sure, Mr. Alan. I would be happy to help.",
+                keywords: ["sure", "course", "pleasure", "gladly", "problem", "yes"],
+                idealAnswer: "Certainly, Mr. Alan! I would be glad to help you carry those.",
+                tip: "When adults ask for your help, show enthusiasm and politeness using phrases like 'Certainly, Sir!', 'Sure, I would be happy to help!', or 'With pleasure!'."
+            }
+        ];
+
+        let matchingScore = 0;
+        let matchingIndex = 0;
+
+        // Custom Sound Generator using Web Audio API (No external file lag!)
+        function playSynthesizedTone(frequency, duration, type = 'sine') {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.type = type;
+                oscillator.frequency.value = frequency;
+                
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio synthesis not supported or blocked by user interaction gesture.");
+            }
+        }
+
+        // Custom Success sound chime
+        function playSuccessSound() {
+            playSynthesizedTone(523.25, 0.15, 'sine'); // C5
+            setTimeout(() => {
+                playSynthesizedTone(659.25, 0.25, 'sine'); // E5
+            }, 100);
+        }
+
+        // Custom Fail sound buzzer
+        function playErrorSound() {
+            playSynthesizedTone(220, 0.3, 'sawtooth'); // A3
+        }
+
+        // Custom Popup Alert Controller
+        function showCustomAlert(title, message, icon = '💡') {
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-message').textContent = message;
+            document.getElementById('alert-icon').textContent = icon;
+            document.getElementById('custom-alert').classList.remove('hidden');
+        }
+
+        function closeAlert() {
+            document.getElementById('custom-alert').classList.add('hidden');
+        }
+
+        // Section Switcher Controller
+        function switchSection(secName, preventRender = false) {
+            document.getElementById('sec-home').classList.add('hidden');
+            document.getElementById('sec-materi').classList.add('hidden');
+            document.getElementById('sec-listening').classList.add('hidden');
+            document.getElementById('sec-matching').classList.add('hidden');
+            document.getElementById('sec-game').classList.add('hidden');
+            document.getElementById('sec-jumbled').classList.add('hidden');
+            document.getElementById('sec-essay').classList.add('hidden');
+            document.getElementById('sec-kuis').classList.add('hidden');
+
+            document.getElementById(`sec-${secName}`).classList.remove('hidden');
+            
+            // Un-highlight all nav items
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white', 'hover:bg-purple-700');
+                btn.classList.add('text-slate-700', 'hover:bg-purple-100');
+            });
+
+            // Highlight chosen nav button
+            const activeBtn = document.getElementById(`nav-${secName}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-700', 'hover:bg-purple-100');
+                activeBtn.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-700');
+            }
+
+            activeSection = secName;
+
+            // Trigger initialization blocks
+            if (secName === 'materi') {
+                if (!preventRender) {
+                    openMateri(activeMateri);
+                }
+            } else if (secName === 'listening') {
+                initListening();
+            } else if (secName === 'matching') {
+                initMatching();
+            } else if (secName === 'game') {
+                initGame();
+            } else if (secName === 'jumbled') {
+                initJumbledGame();
+            } else if (secName === 'essay') {
+                initEssay();
+            } else if (secName === 'kuis') {
+                initQuiz();
+            }
+        }
+
+        // TTS Playback Core Engine with US Native American accent search filters
+        function speakUSAccentText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                const voices = window.speechSynthesis.getVoices();
+                
+                const usVoice = voices.find(v => 
+                    v.lang === 'en-US' || 
+                    v.lang.includes('en_US') || 
+                    v.name.includes('Google US English') || 
+                    v.name.includes('Samantha') || 
+                    v.name.includes('Zira') || 
+                    v.name.includes('Natural')
+                );
+                
+                if (usVoice) {
+                    utterance.voice = usVoice;
+                } else {
+                    const enVoice = voices.find(v => v.lang.startsWith('en'));
+                    if (enVoice) utterance.voice = enVoice;
+                }
+                
+                const speedVal = parseFloat(document.getElementById('tts-rate-control').value) || 0.8;
+                utterance.rate = speedVal;
+                utterance.pitch = 1.0;
+
+                const visualDisc = document.getElementById('listening-visual-state');
+                const pulseIcon = document.getElementById('speaker-pulse-icon');
+                
+                utterance.onstart = () => {
+                    if (visualDisc) visualDisc.classList.add('animate-spin');
+                    if (pulseIcon) pulseIcon.className = "fa-solid fa-volume-high text-4xl text-yellow-300 animate-pulse";
+                };
+
+                utterance.onend = () => {
+                    if (visualDisc) visualDisc.classList.remove('animate-spin');
+                    if (pulseIcon) pulseIcon.className = "fa-solid fa-circle-play text-4xl text-white";
+                };
+
+                utterance.onerror = () => {
+                    if (visualDisc) visualDisc.classList.remove('animate-spin');
+                    if (pulseIcon) pulseIcon.className = "fa-solid fa-circle-play text-4xl text-white";
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                showCustomAlert("Browser Alert", "Your device browser does not support Speech Synthesis audio generation.", "⚠️");
+            }
+        }
+
+        if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
+        // ================= MATERI CONTROLLERS =================
+        function openMateri(materiKey) {
+            activeMateri = materiKey;
+            switchSection('materi', true);
+
+            document.querySelectorAll('.materi-tab').forEach(tab => {
+                tab.className = "materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200 bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+
+            const currentTab = document.getElementById(`tab-${materiKey}`);
+            let themeColor = 'purple';
+            let bgActive = 'bg-purple-600 text-white';
+
+            if (materiKey === 'greeting') {
+                themeColor = 'emerald';
+                bgActive = 'bg-emerald-600 text-white';
+            } else if (materiKey === 'leave') {
+                themeColor = 'sky';
+                bgActive = 'bg-sky-600 text-white';
+            } else if (materiKey === 'gratitude') {
+                themeColor = 'amber';
+                bgActive = 'bg-amber-600 text-white';
+            } else if (materiKey === 'apology') {
+                themeColor = 'rose';
+                bgActive = 'bg-rose-600 text-white';
+            }
+
+            if (currentTab) {
+                currentTab.className = `materi-tab px-6 py-3 rounded-full font-bold text-sm shadow transition duration-200 ${bgActive}`;
+            }
+
+            const data = materiData[materiKey];
+            
+            let expressionsHTML = '';
+            data.expressions.forEach((item) => {
+                expressionsHTML += `
+                    <tr class="hover:bg-slate-50 transition border-b border-slate-100 text-xs sm:text-sm">
+                        <td class="py-3.5 px-4 font-semibold text-slate-800">${item.expression}</td>
+                        <td class="py-3.5 px-4 text-purple-600 font-bold">${item.response}</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold ${item.type.includes('Formal') ? 'bg-purple-100 text-purple-800' : 'bg-pink-100 text-pink-800'}">
+                                ${item.type}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-500 text-xs italic">${item.meaning}</td>
+                    </tr>
+                `;
+            });
+
+            let dialogueHTML = '';
+            data.dialogue.lines.forEach((line) => {
+                const isLeft = line.speaker === data.dialogue.cast[0];
+                dialogueHTML += `
+                    <div class="flex flex-col ${isLeft ? 'items-start' : 'items-end'} mb-4">
+                        <span class="text-[10px] font-bold text-slate-400 mb-1">${line.speaker}</span>
+                        <div class="max-w-[85%] rounded-2xl p-4 shadow-sm relative group ${
+                            isLeft 
+                            ? 'bg-gradient-to-br from-slate-100 to-slate-200 text-slate-800 rounded-tl-none' 
+                            : 'bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-tr-none'
+                        }">
+                            <p class="text-xs sm:text-sm md:text-base font-semibold leading-relaxed">${line.text}</p>
+                            <button onclick="speakUSAccentText('${line.text.replace(/'/g, "\\'")}')" class="absolute -top-3 -right-3 hidden group-hover:flex bg-yellow-400 hover:bg-yellow-500 text-slate-900 w-7 h-7 rounded-full items-center justify-center text-xs shadow-md" title="Listen bubble">
+                                🔊
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let rulesHTML = '';
+            data.keyRules.forEach(rule => {
+                rulesHTML += `<li class="text-xs sm:text-sm text-slate-600 list-disc ml-5 leading-relaxed mb-2">${rule}</li>`;
+            });
+
+            const contentContainer = document.getElementById('materi-content');
+            contentContainer.innerHTML = `
+                <div class="space-y-8 animate-fade-in">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b pb-6 border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center bg-slate-50 rounded-2xl p-1 shadow-sm border border-slate-100">
+                                ${data.icon}
+                            </div>
+                            <div>
+                                <h1 class="text-xl sm:text-2xl md:text-3xl font-kids text-slate-800">${data.title}</h1>
+                                <p class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Class VII • Interactive Guide</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-100 px-4 py-3 rounded-2xl text-xs sm:text-sm text-purple-700 font-bold max-w-sm flex items-center gap-2">
+                            <span class="text-xl">💡</span>
+                            <span>Hover/tap bubbles below and click the speaker button to hear instant American Native audio!</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-700 text-base sm:text-lg mb-3">Topic Overview</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${data.intro}</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50/50 p-6 rounded-2xl border border-purple-100">
+                            <h3 class="font-bold text-purple-900 text-base sm:text-lg mb-3">Key Usage & Tips 🎯</h3>
+                            <ul class="space-y-1">
+                                ${rulesHTML}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-kids text-lg sm:text-xl text-slate-800 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-purple-500"></i> Common Expression Matrix
+                        </h3>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
+                            <table class="min-w-full text-left bg-white">
+                                <thead class="bg-slate-800 text-white text-[10px] sm:text-xs uppercase font-bold">
+                                    <tr>
+                                        <th class="py-3.5 px-4">Expression</th>
+                                        <th class="py-3.5 px-4">Response Choice</th>
+                                        <th class="py-3.5 px-4">Register</th>
+                                        <th class="py-3.5 px-4">Definition & Usage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${expressionsHTML}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-tr from-slate-50 to-purple-50/30 rounded-3xl p-6 border border-slate-100">
+                        <div class="mb-6 text-center md:text-left">
+                            <h3 class="font-kids text-lg sm:text-xl text-slate-800 flex items-center justify-center md:justify-start gap-2">
+                                <i class="fa-solid fa-comments text-purple-500"></i> Classroom Roleplay Simulator
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1"><strong>Context Scenario:</strong> ${data.dialogue.situation}</p>
+                        </div>
+
+                        <div class="max-w-xl mx-auto bg-white rounded-3xl p-6 shadow-md border border-slate-100">
+                            ${dialogueHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ================= LISTENING PRACTICE LOGIC =================
+        function initListening() {
+            listenCurrentIndex = 0;
+            listeningScoreValue = 0;
+            document.getElementById('listening-complete-screen').classList.add('hidden');
+            document.getElementById('listening-choices').classList.remove('pointer-events-none');
+            
+            document.getElementById('listen-curr-idx').parentElement.parentElement.classList.remove('hidden');
+            document.getElementById('listen-question-text').parentElement.classList.remove('hidden');
+            document.getElementById('listening-choices').classList.remove('hidden');
+            
+            loadListeningQuestion();
+        }
+
+        function loadListeningQuestion() {
+            const data = listeningData[listenCurrentIndex];
+            document.getElementById('listen-curr-idx').textContent = listenCurrentIndex + 1;
+            document.getElementById('listening-score').textContent = listeningScoreValue;
+            document.getElementById('listen-question-text').textContent = data.question;
+
+            document.getElementById('listening-script-box').classList.add('hidden');
+            document.getElementById('btn-next-listening').classList.add('hidden');
+
+            const container = document.getElementById('listening-choices');
+            container.innerHTML = '';
+
+            data.choices.forEach((choice, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "listening-choice-btn text-left p-4 rounded-xl bg-white border-2 border-slate-200 hover:border-purple-400 font-semibold text-xs sm:text-sm text-slate-700 hover:bg-purple-50/50 transition shadow-sm";
+                btn.textContent = choice.text;
+                btn.onclick = () => selectListeningChoice(idx);
+                container.appendChild(btn);
+            });
+
+            setTimeout(() => {
+                playCurrentListeningDialog();
+            }, 600);
+        }
+
+        function playCurrentListeningDialog() {
+            const textToSpeak = listeningData[listenCurrentIndex].dialogText;
+            speakUSAccentText(textToSpeak);
+        }
+
+        function selectListeningChoice(idx) {
+            const data = listeningData[listenCurrentIndex];
+            const choice = data.choices[idx];
+            const buttons = document.querySelectorAll('.listening-choice-btn');
+
+            document.getElementById('listening-choices').classList.add('pointer-events-none');
+
+            if (choice.isCorrect) {
+                playSuccessSound();
+                listeningScoreValue += 20;
+                document.getElementById('listening-score').textContent = listeningScoreValue;
+                buttons[idx].className = "listening-choice-btn text-left p-4 rounded-xl bg-emerald-50 border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm";
+            } else {
+                playErrorSound();
+                buttons[idx].className = "listening-choice-btn text-left p-4 rounded-xl bg-rose-50 border-2 border-rose-500 font-bold text-xs sm:text-sm text-rose-800 shadow-sm";
+                const correctIdx = data.choices.findIndex(c => c.isCorrect);
+                buttons[correctIdx].className = "listening-choice-btn text-left p-4 rounded-xl bg-emerald-50 border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm";
+            }
+
+            document.getElementById('listening-script-text').textContent = data.dialogText;
+            document.getElementById('listening-script-box').classList.remove('hidden');
+            
+            document.getElementById('btn-next-listening').classList.remove('hidden');
+        }
+
+        function nextListeningQuestion() {
+            document.getElementById('listening-choices').classList.remove('pointer-events-none');
+            
+            if (listenCurrentIndex < listeningData.length - 1) {
+                listenCurrentIndex++;
+                loadListeningQuestion();
+            } else {
+                document.getElementById('listen-curr-idx').parentElement.parentElement.classList.add('hidden');
+                document.getElementById('listen-question-text').parentElement.classList.add('hidden');
+                document.getElementById('listening-choices').classList.add('hidden');
+                document.getElementById('btn-next-listening').classList.add('hidden');
+                document.getElementById('listening-script-box').classList.add('hidden');
+
+                document.getElementById('listening-complete-screen').classList.remove('hidden');
+                document.getElementById('listening-final-score').textContent = `${listeningScoreValue / 20} / ${listeningData.length}`;
+            }
+        }
+
+        function restartListening() {
+            initListening();
+        }
+
+        // ================= EXPRESSION MATCHING GAME LOGIC =================
+        function initMatching() {
+            matchingScore = 0;
+            matchingIndex = 0;
+            document.getElementById('matching-game-deck').classList.remove('hidden');
+            document.getElementById('matching-complete').classList.add('hidden');
+            loadMatchingCard();
+        }
+
+        function loadMatchingCard() {
+            const data = matchingData[matchingIndex];
+            document.getElementById('matching-score').textContent = matchingScore;
+            document.getElementById('matching-item-idx').textContent = `${matchingIndex + 1}/${matchingData.length}`;
+            document.getElementById('matching-card-text').textContent = `"${data.expression}"`;
+            
+            const explanationBox = document.getElementById('matching-explanation');
+            explanationBox.classList.add('hidden');
+            explanationBox.textContent = "";
+
+            // Enable buttons
+            toggleMatchingButtons(true);
+        }
+
+        function toggleMatchingButtons(enable) {
+            const buttons = document.querySelectorAll('#matching-game-deck button');
+            buttons.forEach(btn => {
+                if(btn.id !== 'speak-card-btn') {
+                    btn.disabled = !enable;
+                    if(enable) {
+                        btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                    } else {
+                        btn.classList.add('opacity-40', 'cursor-not-allowed');
+                    }
+                }
+            });
+        }
+
+        function speakMatchingCard() {
+            const textToSpeak = matchingData[matchingIndex].expression;
+            speakUSAccentText(textToSpeak);
+        }
+
+        function submitMatch(chosenCategory) {
+            const data = matchingData[matchingIndex];
+            const explanationBox = document.getElementById('matching-explanation');
+            
+            toggleMatchingButtons(false);
+
+            explanationBox.classList.remove('hidden');
+            
+            if (chosenCategory === data.category) {
+                playSuccessSound();
+                matchingScore += 100;
+                document.getElementById('matching-score').textContent = matchingScore;
+                
+                explanationBox.className = "p-5 rounded-2xl text-center font-bold text-sm bg-emerald-100 text-emerald-800 block border border-emerald-300 animate-pulse";
+                explanationBox.innerHTML = `✨ Correct Answer! <br><span class="font-semibold text-xs text-emerald-700">${data.explanation}</span>`;
+            } else {
+                playErrorSound();
+                explanationBox.className = "p-5 rounded-2xl text-center font-bold text-sm bg-rose-100 text-rose-800 block border border-rose-300";
+                explanationBox.innerHTML = `❌ incorrect Choice! <br><span class="font-semibold text-xs text-rose-700">Actually, this is a ${data.category} expression. ${data.explanation}</span>`;
+            }
+
+            // Move card forward in 2.5 seconds
+            setTimeout(() => {
+                nextMatchingCard();
+            }, 3000);
+        }
+
+        function nextMatchingCard() {
+            if (matchingIndex < matchingData.length - 1) {
+                matchingIndex++;
+                loadMatchingCard();
+            } else {
+                document.getElementById('matching-game-deck').classList.add('hidden');
+                document.getElementById('matching-complete').classList.remove('hidden');
+                document.getElementById('matching-final-score').textContent = matchingScore;
+            }
+        }
+
+        function restartMatching() {
+            initMatching();
+        }
+
+        // ================= GAME LOGIC =================
+        function initGame() {
+            gameScore = 0;
+            gameLevel = 1;
+            document.getElementById('game-container').classList.remove('hidden');
+            document.getElementById('game-complete').classList.add('hidden');
+            loadGameLevel();
+        }
+
+        function loadGameLevel() {
+            const currentLevelData = gameData[gameLevel - 1];
+            document.getElementById('game-level').textContent = `${gameLevel}/${gameData.length}`;
+            document.getElementById('game-score').textContent = gameScore;
+            document.getElementById('game-avatar-box').textContent = currentLevelData.visual;
+            document.getElementById('game-situation').textContent = currentLevelData.situation;
+
+            const optionsContainer = document.getElementById('game-options');
+            optionsContainer.innerHTML = '';
+
+            const feedbackArea = document.getElementById('game-feedback');
+            feedbackArea.className = "hidden p-4 rounded-xl text-center font-bold text-sm transition-all duration-300";
+            feedbackArea.textContent = "";
+
+            document.getElementById('btn-next-game').classList.add('hidden');
+
+            currentLevelData.options.forEach((opt, idx) => {
+                const button = document.createElement('button');
+                button.className = "game-opt-btn bg-white hover:bg-indigo-50 text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 font-bold text-xs sm:text-sm text-slate-700 transition duration-150 shadow-sm flex items-center justify-between";
+                button.innerHTML = `
+                    <span class="pr-2">${opt.text}</span>
+                    <span class="text-indigo-400">➜</span>
+                `;
+                button.onclick = () => selectGameOption(idx);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectGameOption(index) {
+            const currentLevelData = gameData[gameLevel - 1];
+            const selectedOpt = currentLevelData.options[index];
+            const feedbackArea = document.getElementById('game-feedback');
+            
+            document.querySelectorAll('.game-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-60', 'cursor-not-allowed');
+            });
+
+            const buttons = document.querySelectorAll('.game-opt-btn');
+            
+            if (selectedOpt.isCorrect) {
+                playSuccessSound();
+                gameScore += 100;
+                document.getElementById('game-score').textContent = gameScore;
+                buttons[index].className = "game-opt-btn bg-emerald-50 text-left p-4 rounded-2xl border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm flex items-center justify-between";
+                feedbackArea.className = "p-4 rounded-xl text-center font-bold text-sm bg-emerald-100 text-emerald-800 block";
+                feedbackArea.innerHTML = `✨ Correct Choice! <br><span class="font-normal text-xs">${selectedOpt.feedback}</span>`;
+            } else {
+                playErrorSound();
+                buttons[index].className = "game-opt-btn bg-rose-50 text-left p-4 rounded-2xl border-2 border-rose-400 font-bold text-xs sm:text-sm text-rose-800 shadow-sm flex items-center justify-between";
+                const correctIdx = currentLevelData.options.findIndex(o => o.isCorrect);
+                buttons[correctIdx].className = "game-opt-btn bg-emerald-50 text-left p-4 rounded-2xl border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm flex items-center justify-between";
+                feedbackArea.className = "p-4 rounded-xl text-center font-bold text-sm bg-rose-100 text-rose-800 block";
+                feedbackArea.innerHTML = `❌ Incorrect Option! <br><span class="font-normal text-xs">${selectedOpt.feedback}</span>`;
+            }
+
+            document.getElementById('btn-next-game').classList.remove('hidden');
+        }
+
+        function nextGameLevel() {
+            if (gameLevel < gameData.length) {
+                gameLevel++;
+                loadGameLevel();
+            } else {
+                document.getElementById('game-container').classList.add('hidden');
+                document.getElementById('game-complete').classList.remove('hidden');
+                document.getElementById('game-final-score').textContent = gameScore;
+            }
+        }
+
+        function restartGame() {
+            initGame();
+        }
+
+        // ================= DIALOGUE JUMBLED PUZZLE LOGIC =================
+        function initJumbledGame() {
+            jumbledLevel = 1;
+            jumbledScore = 0;
+            document.getElementById('jumbled-complete-screen').classList.add('hidden');
+            document.getElementById('jumbled-container').classList.remove('hidden');
+            loadJumbledLevel();
+        }
+
+        function loadJumbledLevel() {
+            const data = jumbledData[jumbledLevel - 1];
+            document.getElementById('jumbled-level').textContent = `${jumbledLevel}/${jumbledData.length}`;
+            document.getElementById('jumbled-score').textContent = jumbledScore;
+            document.getElementById('jumbled-scenario').textContent = data.scenario;
+
+            // Clear state
+            jumbledUserArrangement = [];
+            document.getElementById('jumbled-eval-feedback').classList.add('hidden');
+            document.getElementById('btn-check-jumbled').classList.remove('hidden');
+            document.getElementById('btn-next-jumbled').classList.add('hidden');
+
+            // Generate scrambled copy
+            jumbledPool = shuffleArray([...data.correctOrder]);
+
+            renderJumbledElements();
+        }
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function renderJumbledElements() {
+            // Render Selected Slots
+            const slotsContainer = document.getElementById('jumbled-selection-slots');
+            slotsContainer.innerHTML = '';
+            
+            if (jumbledUserArrangement.length === 0) {
+                slotsContainer.innerHTML = `<div class="text-slate-400 text-xs italic text-center py-6">Your ordered dialogue is currently empty. Tap items below to build the flow!</div>`;
+            } else {
+                jumbledUserArrangement.forEach((sentence, index) => {
+                    const bubble = document.createElement('div');
+                    bubble.className = "bg-purple-600 text-white p-3.5 rounded-xl text-xs sm:text-sm font-semibold cursor-pointer shadow-sm hover:bg-purple-700 transition flex items-center justify-between";
+                    bubble.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <span class="bg-purple-800 text-purple-200 text-[10px] px-2 py-0.5 rounded-full font-bold">${index + 1}</span>
+                            <span>${sentence}</span>
+                        </div>
+                        <span class="text-xs text-purple-300">✖</span>
+                    `;
+                    bubble.onclick = () => removeSentenceFromSelection(index);
+                    slotsContainer.appendChild(bubble);
+                });
+            }
+
+            // Render Scrambled Pool
+            const poolContainer = document.getElementById('jumbled-scrambled-pool');
+            poolContainer.innerHTML = '';
+
+            jumbledPool.forEach((sentence, index) => {
+                const button = document.createElement('button');
+                button.className = "text-left p-3.5 rounded-xl bg-white border-2 border-slate-200 hover:border-purple-300 font-medium text-xs sm:text-sm text-slate-700 hover:bg-purple-50/30 transition shadow-sm flex items-center gap-2";
+                button.innerHTML = `
+                    <span class="w-4 h-4 rounded-full bg-slate-200 block"></span>
+                    <span>${sentence}</span>
+                `;
+                button.onclick = () => addSentenceToSelection(index);
+                poolContainer.appendChild(button);
+            });
+        }
+
+        function addSentenceToSelection(poolIndex) {
+            const sentence = jumbledPool[poolIndex];
+            jumbledUserArrangement.push(sentence);
+            jumbledPool.splice(poolIndex, 1);
+            renderJumbledElements();
+        }
+
+        function removeSentenceFromSelection(selectedIndex) {
+            const sentence = jumbledUserArrangement[selectedIndex];
+            jumbledPool.push(sentence);
+            jumbledUserArrangement.splice(selectedIndex, 1);
+            renderJumbledElements();
+        }
+
+        function resetCurrentJumbledLevel() {
+            const data = jumbledData[jumbledLevel - 1];
+            jumbledUserArrangement = [];
+            jumbledPool = shuffleArray([...data.correctOrder]);
+            document.getElementById('jumbled-eval-feedback').classList.add('hidden');
+            renderJumbledElements();
+        }
+
+        function checkJumbledArrangement() {
+            const data = jumbledData[jumbledLevel - 1];
+            const feedback = document.getElementById('jumbled-eval-feedback');
+
+            if (jumbledUserArrangement.length < data.correctOrder.length) {
+                showCustomAlert("Incomplete Order", "Please place all scrambled sentences into the ordering grid before verifying!", "⚠️");
+                return;
+            }
+
+            let isCorrect = true;
+            for (let i = 0; i < data.correctOrder.length; i++) {
+                if (jumbledUserArrangement[i] !== data.correctOrder[i]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            feedback.classList.remove('hidden');
+            if (isCorrect) {
+                playSuccessSound();
+                jumbledScore += 100;
+                document.getElementById('jumbled-score').textContent = jumbledScore;
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-emerald-100 text-emerald-800 block";
+                feedback.innerHTML = "🏆 Perfect Logical Flow! You have successfully organized this conversation in the correct interpersonal order.";
+                document.getElementById('btn-check-jumbled').classList.add('hidden');
+                document.getElementById('btn-next-jumbled').classList.remove('hidden');
+            } else {
+                playErrorSound();
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-rose-100 text-rose-800 block";
+                feedback.innerHTML = "❌ The sentences are out of order. Consider the register: greeting must open, apology/gratitude must address specific actions, and leave-taking always concludes.";
+            }
+        }
+
+        function nextJumbledLevel() {
+            if (jumbledLevel < jumbledData.length) {
+                jumbledLevel++;
+                loadJumbledLevel();
+            } else {
+                document.getElementById('jumbled-container').classList.add('hidden');
+                document.getElementById('jumbled-complete-screen').classList.remove('hidden');
+                document.getElementById('jumbled-final-score').textContent = jumbledScore;
+            }
+        }
+
+        function restartJumbledGame() {
+            initJumbledGame();
+        }
+
+        // ================= DIALOGUE DETECTIVE SHORT ESSAY LOGIC =================
+        function initEssay() {
+            essayCurrentIndex = 0;
+            essayScore = 0;
+            document.getElementById('essay-container').classList.remove('hidden');
+            document.getElementById('essay-complete-screen').classList.add('hidden');
+            loadEssayQuestion();
+        }
+
+        function loadEssayQuestion() {
+            const current = essayData[essayCurrentIndex];
+            const progressPercent = ((essayCurrentIndex + 1) / essayData.length) * 100;
+
+            document.getElementById('essay-progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('essay-current-num').textContent = essayCurrentIndex + 1;
+            document.getElementById('essay-score').textContent = essayScore;
+            document.getElementById('essay-avatar').textContent = current.avatar;
+            document.getElementById('essay-char-name').textContent = current.character;
+            document.getElementById('essay-situation').textContent = current.situation;
+            
+            const userInput = document.getElementById('essay-user-input');
+            userInput.value = '';
+            userInput.placeholder = current.placeholder;
+            userInput.disabled = false;
+
+            document.getElementById('essay-feedback').classList.add('hidden');
+            document.getElementById('btn-submit-essay').classList.remove('hidden');
+            document.getElementById('btn-next-essay').classList.add('hidden');
+        }
+
+        function submitEssayAnswer() {
+            const current = essayData[essayCurrentIndex];
+            const userInput = document.getElementById('essay-user-input');
+            const userText = userInput.value.trim().toLowerCase();
+
+            if (userText.length < 3) {
+                showCustomAlert("Answer Too Short", "Please write a meaningful short response in English before submitting!", "⚠️");
+                return;
+            }
+
+            userInput.disabled = true;
+            document.getElementById('btn-submit-essay').classList.add('hidden');
+
+            const hasKeywords = current.keywords.some(kw => userText.includes(kw));
+            const feedbackBox = document.getElementById('essay-feedback');
+            feedbackBox.classList.remove('hidden');
+
+            if (hasKeywords) {
+                playSuccessSound();
+                essayScore += 10;
+                document.getElementById('essay-score').textContent = essayScore;
+
+                feedbackBox.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-200 block space-y-2 animate-pulse";
+                feedbackBox.innerHTML = `
+                    <h4 class="font-bold text-emerald-800 text-sm flex items-center gap-1">
+                        ✨ Excellent Case Solving! (+10 Points)
+                    </h4>
+                    <p class="text-xs sm:text-sm text-emerald-700 leading-relaxed">
+                        Fantastic job! You used key words matching this conversation context. Let's compare your write-up with the model answer.
+                    </p>
+                    <div class="mt-2 text-xs border-t border-emerald-200 pt-2 text-slate-700">
+                        <p class="font-bold">🎯 Ideal Model Answer:</p>
+                        <p class="italic text-indigo-950 font-semibold">"${current.idealAnswer}"</p>
+                        <p class="mt-1 text-slate-500 font-semibold">💡 Tip: ${current.tip}</p>
+                    </div>
+                `;
+            } else {
+                playErrorSound();
+                feedbackBox.className = "p-5 rounded-2xl border bg-amber-50 border-amber-200 block space-y-2";
+                feedbackBox.innerHTML = `
+                    <h4 class="font-bold text-amber-800 text-sm flex items-center gap-1">
+                        💡 Good Try! Let's Refine it!
+                    </h4>
+                    <p class="text-xs sm:text-sm text-amber-700 leading-relaxed">
+                        Your sentence is understandable, but we can make it more polite or matching the core keyword. Look at the tips below to polish your speech!
+                    </p>
+                    <div class="mt-2 text-xs border-t border-amber-200 pt-2 text-slate-700">
+                        <p class="font-bold">🎯 Ideal Model Answer:</p>
+                        <p class="italic text-indigo-950 font-semibold">"${current.idealAnswer}"</p>
+                        <p class="mt-1 text-slate-500 font-semibold">💡 Tip: ${current.tip}</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('btn-next-essay').classList.remove('hidden');
+        }
+
+        function nextEssayQuestion() {
+            if (essayCurrentIndex < essayData.length - 1) {
+                essayCurrentIndex++;
+                loadEssayQuestion();
+            } else {
+                document.getElementById('essay-container').classList.add('hidden');
+                document.getElementById('essay-complete-screen').classList.remove('hidden');
+                document.getElementById('essay-final-score').textContent = essayScore;
+            }
+        }
+
+        function restartEssay() {
+            initEssay();
+        }
+
+        // ================= KUIS HOTS LOGIC =================
+        function initQuiz() {
+            quizCurrentIndex = 0;
+            quizScore = 0;
+            document.getElementById('quiz-area').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            const currentQ = quizQuestions[quizCurrentIndex];
+            const progressPercent = ((quizCurrentIndex + 1) / quizQuestions.length) * 100;
+            
+            document.getElementById('quiz-progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('quiz-current-num').textContent = quizCurrentIndex + 1;
+            document.getElementById('quiz-scenario').textContent = currentQ.scenario;
+            document.getElementById('quiz-question').textContent = currentQ.question;
+
+            document.getElementById('quiz-explanation-box').classList.add('hidden');
+            document.getElementById('btn-next-quiz').classList.add('hidden');
+
+            const choicesContainer = document.getElementById('quiz-choices');
+            choicesContainer.innerHTML = '';
+
+            currentQ.choices.forEach((choice, index) => {
+                const btn = document.createElement('button');
+                btn.className = "quiz-choice-btn text-left p-4 rounded-2xl bg-white border-2 border-slate-200 hover:border-rose-400 font-semibold text-xs sm:text-sm text-slate-700 hover:bg-rose-50/20 transition duration-150 shadow-sm";
+                btn.textContent = choice.text;
+                btn.onclick = () => selectQuizChoice(index);
+                choicesContainer.appendChild(btn);
+            });
+        }
+
+        function selectQuizChoice(choiceIndex) {
+            const currentQ = quizQuestions[quizCurrentIndex];
+            const selectedChoice = currentQ.choices[choiceIndex];
+
+            document.querySelectorAll('.quiz-choice-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-60', 'cursor-not-allowed');
+            });
+
+            const buttons = document.querySelectorAll('.quiz-choice-btn');
+            const feedbackBox = document.getElementById('quiz-explanation-box');
+            const feedbackTitle = document.getElementById('quiz-feedback-title');
+            const feedbackText = document.getElementById('quiz-explanation-text');
+
+            if (selectedChoice.isCorrect) {
+                playSuccessSound();
+                quizScore += 20; 
+                buttons[choiceIndex].className = "quiz-choice-btn text-left p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm";
+                feedbackBox.className = "p-5 rounded-2xl border bg-emerald-50 border-emerald-200 block";
+                feedbackTitle.className = "font-bold text-base text-emerald-800 mb-1";
+                feedbackTitle.textContent = "Superb! Correct Analysis! 🎉";
+            } else {
+                playErrorSound();
+                buttons[choiceIndex].className = "quiz-choice-btn text-left p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 font-bold text-xs sm:text-sm text-rose-800 shadow-sm";
+                const correctIndex = currentQ.choices.findIndex(c => c.isCorrect);
+                buttons[correctIndex].className = "quiz-choice-btn text-left p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 font-bold text-xs sm:text-sm text-emerald-800 shadow-sm";
+
+                feedbackBox.className = "p-5 rounded-2xl border bg-rose-50 border-rose-200 block";
+                feedbackTitle.className = "font-bold text-base text-rose-800 mb-1";
+                feedbackTitle.textContent = "Oops, Incorrect Analysis! 💡";
+            }
+
+            feedbackText.textContent = currentQ.explanation;
+            document.getElementById('btn-next-quiz').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            if (quizCurrentIndex < quizQuestions.length - 1) {
+                quizCurrentIndex++;
+                loadQuizQuestion();
+            } else {
+                document.getElementById('quiz-area').classList.add('hidden');
+                document.getElementById('quiz-results').classList.remove('hidden');
+
+                document.getElementById('quiz-final-score').textContent = quizScore;
+                document.getElementById('quiz-correct-count').textContent = `${quizScore / 20}/5`;
+
+                const evaluationText = document.getElementById('quiz-result-evaluation');
+                if (quizScore === 100) {
+                    evaluationText.textContent = "Spectacular! You have achieved complete HOTS social awareness. Your mastery of English polite speech and situational constraints is unmatched! 🏆";
+                } else if (quizScore >= 60) {
+                    evaluationText.textContent = "Great job! You possess very strong social intelligence. Only minor attention to detail is required. 🌟";
+                } else {
+                    evaluationText.textContent = "Don't lose heart! Go back to the 'Topics' tabs to reread the difference in social ranks and situational expectations. Keep practicing! 💪";
+                }
+            }
+        }
+
+        function restartQuiz() {
+            initQuiz();
+        }
+
+        window.onload = () => {
+            switchSection('home');
+        };
+    </script>
+</body>
+</html>
